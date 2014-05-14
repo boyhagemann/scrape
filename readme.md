@@ -94,4 +94,7 @@ Scraper::add(function('page-2', function($crawler) {
 });
 ```
 
-```
+> Chained processes can consume lots of time and resources, so don't go mental on chaining everything.
+
+You can use the Laravel Queue or a database in conjunction with cron jobs to manage all page crawls.
+This will save you from the nasty requrest time outs!
