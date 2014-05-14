@@ -18,7 +18,12 @@ class ScrapeServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register()
-	{
+	{        
+        $this->package('boyhagemann/scrape');
+    }
+    
+    public function boot()
+    {
 		/**
 		 * Create a singleton of the container to reuse all pages within
 		 * the application.
@@ -32,6 +37,9 @@ class ScrapeServiceProvider extends ServiceProvider {
 
 			return $container;
 		});
+        
+		// Create an alias for the scraper container class
+		$this->app->alias('Boyhagemann\Scrape\Container', 'scraper');
 	}
 
 	/**
@@ -41,7 +49,7 @@ class ScrapeServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('scraper');
 	}
 
 }

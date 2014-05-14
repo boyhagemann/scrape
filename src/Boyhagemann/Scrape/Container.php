@@ -1,24 +1,43 @@
-<?php namespace Boyhagemann\Scrape;
+<?php 
+
+namespace Boyhagemann\Scrape;
 
 use Closure;
 
 class Container
 {
+    /**
+     * A collection of Pages
+     *
+     * @var Page[]
+     */
 	protected $pages = array();
 
+    /**
+     * You can define the Page object with a closure
+     *
+     * @var Closure 
+     */
 	protected $build;
 
-	public function buildPage($callback)
+    /**
+     * Define how the Page object is setup
+     * 
+     * @param Closure $callback
+     */
+	public function buildPage(Closure $callback)
 	{
 		$this->build = $callback;
 	}
 
 	/**
-	 * @param         $name
+     * Add a page to the container
+     * 
+	 * @param string  $name
 	 * @param Closure $callback
-	 * @return mixed
+	 * @return Page
 	 */
-	public function addPage($name, Closure $callback)
+	public function add($name, Closure $callback)
 	{
 		$page = call_user_func($this->build);
 		$page->analyze($callback);
@@ -29,11 +48,25 @@ class Container
 	}
 
 	/**
+     * Get a page from the container
+     * 
 	 * @param $name
 	 * @return Page
 	 */
-	public function getPage($name)
+	public function get($name)
 	{
 		return $this->pages[$name];
 	}
+    
+    /**
+     * Get a page from the container and start scraping
+     * 
+     * @param string $name
+     * @param string $uri
+     */
+    public function scrape($name, $uri)
+    {        
+		$this->get($name)->scan($uri);
+    }
+
 }

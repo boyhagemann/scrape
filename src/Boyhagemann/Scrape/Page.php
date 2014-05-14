@@ -6,10 +6,29 @@ use Closure;
 
 class Page {
 
+    /**
+     *
+     * @var Client 
+     */
 	protected $client;
+    
+    /**
+     *
+     * @var string 
+     */
 	protected $uri;
+    
+    /**
+     *
+     * @var Closure 
+     */
 	protected $callback;
 
+    /**
+     * 
+     * @param Client $client
+     * @param Crawler $crawler
+     */
 	public function __construct(Client $client, Crawler $crawler)
 	{
 		$this->client = $client;
@@ -27,12 +46,21 @@ class Page {
 		return $response->getBody(true);
 	}
 
+    /**
+     * The code inside the closure is used after the
+     * page is scanned. You have a Crawler instance
+     * at your disposal with the DOM of the page.
+     * 
+     * @param Closure $callback
+     */
 	public function analyze(Closure $callback)
 	{
 		$this->callback = $callback;
 	}
 
 	/**
+     * Scan the page with the given uri
+     * 
 	 * @param $uri
 	 */
 	public function scan($uri)
