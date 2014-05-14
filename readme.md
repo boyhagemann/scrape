@@ -75,6 +75,10 @@ Scraper::add('page-name', function(Crawler $crawler) {
 
 });
 ```
+## Crawling strategies
+Most of the time, you don't know exactly all urls to the desired content. 
+If you have thousands of urls to crawl, it is impossible to manage this manually.
+You can use Scrape to follow links to get to the desired content.
 
 ### Chain pages together
 You can have crawl multiple pages after each other with great ease:
@@ -99,9 +103,8 @@ Scraper::add('page-2', function($crawler) {
     });
 });
 ```
-
-> Chained processes can consume lots of time and resources, so don't go mental on chaining everything.
-
+### No more time outs!
+Chained processes can consume lots of time and resources, so don't go mental on chaining everything.
 You can use the Laravel Queue or a database in conjunction with cron jobs to manage all page crawls.
 This will save you from the nasty requrest time outs!
 
