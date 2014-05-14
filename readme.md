@@ -35,14 +35,16 @@ With Scrape you can define how to deal with the content on that page.
 The first thing you want to do is to add a page to the container.
 
 ```php
-// Using the Laravel Facade
 Scraper::add('my-first-page', function() {
 
     // Start scraping...
 
 });
+```
 
-// Without the Facade
+If you don't use the facade, you can do something like this:
+
+```php
 $container = App::make('Boyhagemann\Scrape\Container');
 $container->add('my-second-page', function($crawler) {
 
@@ -51,7 +53,7 @@ $container->add('my-second-page', function($crawler) {
 });
 ```
 
-### Scrape a url
+## Now start scraping!
 After you defined all pages, you are ready to scrape some content!
 This is done very easily, like this:
 
