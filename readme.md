@@ -16,18 +16,20 @@ Then you add the ServiceProvider to the application config:
 You can optionally add the alias:
 `'Scrape' => 'Boyhagemann\Scrape\Facade\Container'`
 
-## How to use
+## How does it work?
 Scrape uses two components for scraping pages:
 
-#### Container
+##### Container
 The container is the single class you will use in most cases.
 It registers a name and a closure with information how to scrape the page.
 
-#### Page
+##### Page
 A page is a template that is used for many urls. 
 An example would be a news item page. 
 It can have many urls, but it has one page template.
 With Scrape you can define how to deal with the content on that page.
+
+## How to use
 
 ### Add pages
 The first thing you want to do is to add a page to the container.
