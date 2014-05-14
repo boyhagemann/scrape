@@ -78,14 +78,16 @@ You can have crawl multiple pages after each other with great ease:
 ```php
 
 // Add a page that has links to your content
-Scraper::add(function('page-1', function($crawler) {
+Scraper::add('page-1', function($crawler) {
+
     $crawler->find('.your-link')->each(function($node) {
         Scraper::scrape('page-2', $node->attr('href'));
     });
 });
 
 // Add the page with all the content
-Scraper::add(function('page-2', function($crawler) {
+Scraper::add('page-2', function($crawler) {
+
     $crawler->find('.your-content')->each(function($node) {
         
         // Get the content and do a little dance!
@@ -98,3 +100,23 @@ Scraper::add(function('page-2', function($crawler) {
 
 You can use the Laravel Queue or a database in conjunction with cron jobs to manage all page crawls.
 This will save you from the nasty requrest time outs!
+
+```php
+Scraper::add('page-1', function($crawler) {
+
+    $crawler->find('.link')->each(function($node) {
+    
+        // Put the next crawl on a queue
+        Queue::push(function($job) use ($node) {
+            
+            // Scrape this page!
+            Scraper::scrape('page-2', $node->attr('href'));
+        
+            // Delete the queue job once finished
+            $job->delete();
+        });
+    
+    });
+
+});
+```
