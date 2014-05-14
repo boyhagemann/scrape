@@ -1,6 +1,6 @@
 ## Scrape
 
-With this Laravel 4 package you can:
+With this awesome Laravel 4 package you can:
 - scrape any contents from a page
 - follow specific link paths to get to that content
 - use closures for optimum usability
@@ -70,4 +70,28 @@ Scraper::add('page-name', function(Crawler $crawler) {
     // You have autocompletion on the $crawler instance...
 
 });
+```
+
+### Chain pages together
+You can have crawl multiple pages after each other with great ease:
+
+```php
+
+// Add a page that has links to your content
+Scraper::add(function('page-1', function($crawler) {
+    $crawler->find('.your-link')->each(function($node) {
+        Scraper::scrape('page-2', $node->attr('href'));
+    });
+});
+
+// Add the page with all the content
+Scraper::add(function('page-2', function($crawler) {
+    $crawler->find('.your-content')->each(function($node) {
+        
+        // Get the content and do a little dance!
+        
+    });
+});
+```
+
 ```
