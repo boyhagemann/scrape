@@ -11,10 +11,14 @@ Use Composer to install with all the dependencies:
 `composer require boyhagemann/scrape *`
 
 Then you add the ServiceProvider to the application config:
-`'Boyhagemann\Scrape\ScrapeServiceProvider'`
+```php
+'Boyhagemann\Scrape\ScrapeServiceProvider'
+``` 
 
 You can optionally add the alias:
-`'Scrape' => 'Boyhagemann\Scrape\Facade\Container'`
+```php
+'Scrape' => 'Boyhagemann\Scrape\Facade\Container'
+```
 
 ## How does it work?
 Scrape uses two components for scraping pages:
