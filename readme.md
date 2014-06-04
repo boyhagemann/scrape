@@ -17,7 +17,7 @@ Then you add the ServiceProvider to the application config:
 
 You can optionally add the alias:
 ```php
-'Scrape' => 'Boyhagemann\Scrape\Facade\Container'
+'Scraper' => 'Boyhagemann\Scrape\Facades\Container'
 ```
 
 ## How does it work?
@@ -91,7 +91,7 @@ You can have crawl multiple pages after each other with great ease:
 // Add a page that has links to your content
 Scraper::add('page-1', function($crawler) {
 
-    $crawler->find('.your-link')->each(function($node) {
+    $crawler->filter('.your-link')->each(function($node) {
         Scraper::scrape('page-2', $node->attr('href'));
     });
 });
@@ -99,7 +99,7 @@ Scraper::add('page-1', function($crawler) {
 // Add the page with all the content
 Scraper::add('page-2', function($crawler) {
 
-    $crawler->find('.your-content')->each(function($node) {
+    $crawler->filter('.your-content')->each(function($node) {
         
         // Get the content and do a little dance!
         
@@ -115,7 +115,7 @@ This will save you from the nasty requrest time outs!
 ```php
 Scraper::add('page-1', function($crawler) {
 
-    $crawler->find('.link')->each(function($node) {
+    $crawler->filter('.link')->each(function($node) {
     
         // Put the next crawl on a queue
         Queue::push(function($job) use ($node) {
