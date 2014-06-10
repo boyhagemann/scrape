@@ -2,7 +2,7 @@
 
 namespace Boyhagemann\Scrape;
 
-use Closure;
+use Closure, StdClass;
 
 class Container
 {
@@ -13,12 +13,41 @@ class Container
      */
 	protected $pages = array();
 
+	/**
+	 * Models that are used for interacting with the scrape data
+	 *
+	 * @var StdClass[]
+	 */
+	protected $models = array();
+
     /**
      * You can define the Page object with a closure
      *
      * @var Closure 
      */
 	protected $build;
+
+	/**
+	 * Set an object to use with the scraped data
+	 *
+	 * @param string   $name
+	 * @param StdClass $model
+	 */
+	public function setModel($name, StdClass $model)
+	{
+		$this->models[$name] = $model;
+	}
+
+	/**
+	 * Get the model to use with the scraped data
+	 *
+	 * @param $name
+	 * @return StdClass
+	 */
+	public function getModel($name)
+	{
+		return $this->model[$name];
+	}
 
     /**
      * Define how the Page object is setup
