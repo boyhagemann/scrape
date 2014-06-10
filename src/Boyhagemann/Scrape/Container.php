@@ -2,7 +2,7 @@
 
 namespace Boyhagemann\Scrape;
 
-use Closure, StdClass;
+use Closure;
 
 class Container
 {
@@ -31,9 +31,9 @@ class Container
 	 * Set an object to use with the scraped data
 	 *
 	 * @param string   $name
-	 * @param StdClass $model
+	 * @param stdClass $model
 	 */
-	public function setModel($name, StdClass $model)
+	public function setModel($name, $model)
 	{
 		$this->models[$name] = $model;
 	}
@@ -42,7 +42,7 @@ class Container
 	 * Get the model to use with the scraped data
 	 *
 	 * @param $name
-	 * @return StdClass
+	 * @return stdClass
 	 */
 	public function getModel($name)
 	{
